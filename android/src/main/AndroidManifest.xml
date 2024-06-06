@@ -1,0 +1,13 @@
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.reactlibrary">
+    <receiver
+    android:name=".RNDivaMobilePaxScannerReceiver"
+    android:enabled="true"
+    android:exported="true">
+        <intent-filter>
+            <action android:name="com.barcode.sendBroadcast" />
+        </intent-filter>
+    </receiver>
+</manifest>
+  

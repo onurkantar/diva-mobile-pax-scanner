@@ -1,0 +1,19 @@
+{
+  "name": "diva-mobile-pax-scanner",
+  "version": "1.0.0",
+  "description": "Diva Mobile Pax Device Internal Barcode Scanner",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "module"
+  ],
+  "author": "Onur Kantar",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-native": "^0.74.2"
+  }
+}

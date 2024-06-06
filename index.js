@@ -1,0 +1,53 @@
+import { DeviceEventEmitter, NativeModules, Platform } from "react-native";
+
+const LINKING_ERROR =
+  'The package "diva-mobile-zebra-scanner" doesn\'t seem to be linked. Make sure: \n\n' +
+  Platform.select({ ios: "- You have run 'pod install'\n", default: "" }) +
+  "- You rebuilt the app after installing the package\n" +
+  "- You are not using Expo Go\n";
+
+const RNDivaMobilePaxScanner = NativeModules.RNDivaMobilePaxScanner
+  ? NativeModules.RNDivaMobilePaxScanner
+  : new Proxy(
+      {},
+      {
+        get() {
+          throw new Error(LINKING_ERROR);
+        },
+      }
+    );
+
+const BARCODE_READ_SUCCESS = "barcodeReadSuccess";
+
+let isListenerAssigned = false;
+
+RNDivaMobilePaxScanner.startReader = (handler) => {
+  if (!isListenerAssigned) {
+    // Initialize the Zebra scanner
+    return RNDivaMobilePaxScanner.init().then(() => {
+      // Subscribe to the BARCODE_READ_SUCCESS event
+      if (
+        DeviceEventEmitter.addListener(
+          BARCODE_READ_SUCCESS,
+          // Pass the event data to the specified handler function
+          (data) => handler(data)
+        )
+      ) {
+        isListenerAssigned = true;
+      }
+    });
+  }
+};
+
+RNDivaMobilePaxScanner.stopReader = () => {
+  if (isListenerAssigned) {
+    // Finalize the Zebra scanner
+    return RNDivaMobilePaxScanner.finalize().then(() => {
+      // Unsubscribe from the event
+      DeviceEventEmitter.removeAllListeners(BARCODE_READ_SUCCESS);
+      isListenerAssigned = false;
+    });
+  }
+};
+
+export default RNDivaMobilePaxScanner;
