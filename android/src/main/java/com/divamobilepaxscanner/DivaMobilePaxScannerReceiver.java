@@ -34,13 +34,13 @@ public class DivaMobilePaxScannerReceiver extends BroadcastReceiver {
             //Log.d("Barcode BroadCast", intent.getAction() + " " + intent.getStringExtra("BARCODE") + " " + intent.getStringExtra("CODE_FORMAT"));
             WritableMap params = Arguments.createMap();
             params.putString("data", intent.getStringExtra("BARCODE"));
-            RNDivaMobilePaxScannerModule.sendEvent(BARCODE_READ_SUCCESS, params);
+            DivaMobilePaxScannerModule.sendEvent(BARCODE_READ_SUCCESS, params);
         }
 
         catch(Exception e){
             WritableMap params = Arguments.createMap();
             params.putString("error", e.getMessage());
-            RNDivaMobilePaxScannerModule.sendEvent(BARCODE_READ_FAIL, params);
+            DivaMobilePaxScannerModule.sendEvent(BARCODE_READ_FAIL, params);
         }
     }
 }
