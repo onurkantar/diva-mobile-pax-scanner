@@ -1,6 +1,6 @@
 {
   "name": "diva-mobile-pax-scanner",
-  "version": "1.0.1",
+  "version": "1.0.10",
   "description": "Diva Mobile Pax Device Internal Barcode Scanner",
   "main": "index.js",
   "scripts": {
