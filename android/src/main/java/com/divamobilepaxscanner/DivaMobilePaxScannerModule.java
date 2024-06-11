@@ -26,15 +26,15 @@ import android.os.Bundle;
 import com.pax.dal.IDAL;
 import com.pax.neptunelite.api.NeptuneLiteUser;
 
-public class RNDivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
+public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
 
   public static final String NAME = "DivaMobilePaxScanner";
   private static ReactApplicationContext reactContext;
-  private RNDivaMobilePaxScannerReceiver paxScannerReceiver;
+  private DivaMobilePaxScannerReceiver paxScannerReceiver;
 
-  public RNDivaMobilePaxScannerModule(ReactApplicationContext reactContext) {
+  public DivaMobilePaxScannerModule(ReactApplicationContext reactContext) {
     super(reactContext);
-    RNDivaMobilePaxScannerModule.reactContext = reactContext;
+    DivaMobilePaxScannerModule.reactContext = reactContext;
   }
 
   @Override
@@ -43,7 +43,7 @@ public class RNDivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
   }
 
   protected static void sendEvent(String eventName, @Nullable WritableMap params) {
-      RNDivaMobilePaxScannerModule.reactContext
+      DivaMobilePaxScannerModule.reactContext
               .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
               .emit(eventName, params);
     }
@@ -52,8 +52,8 @@ public class RNDivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
   public void init(final Promise promise) {
     try 
     {
-      IDAL idal = NeptuneLiteUser.getInstance().getDal(RNDivaMobilePaxScannerModule.reactContext);
-      paxScannerReceiver = new RNDivaMobilePaxScannerReceiver(RNDivaMobilePaxScannerModule.reactContext);
+      IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
+      paxScannerReceiver = new DivaMobilePaxScannerReceiver(DivaMobilePaxScannerModule.reactContext);
       idal.getSys().setScanResultMode(1);
       promise.resolve(true);
     } catch (Exception e) {
