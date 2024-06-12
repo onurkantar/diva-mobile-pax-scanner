@@ -30,7 +30,6 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
 
   public static final String NAME = "DivaMobilePaxScanner";
   private static ReactApplicationContext reactContext;
-  private DivaMobilePaxScannerReceiver paxScannerReceiver;
 
   public DivaMobilePaxScannerModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -53,7 +52,6 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
     try 
     {
       IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
-      this.paxScannerReceiver = new DivaMobilePaxScannerReceiver(DivaMobilePaxScannerModule.reactContext);
       idal.getSys().setScanResultMode(1);
       promise.resolve(true);
     } catch (Exception e) {
@@ -66,7 +64,6 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
     try 
     {
       IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
-      this.paxScannerReceiver = null;
       idal.getSys().setScanResultMode(0);
       promise.resolve(true);
     } catch (Exception e) {
