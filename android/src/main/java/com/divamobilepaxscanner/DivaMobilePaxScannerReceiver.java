@@ -20,8 +20,6 @@ public class DivaMobilePaxScannerReceiver extends BroadcastReceiver {
     private static final String BARCODE_READ_SUCCESS = "barcodeReadSuccess";
     private static final String BARCODE_READ_FAIL = "barcodeReadFail";
 
-    private ReactApplicationContext reactApplicationContext;
-
     @Override
     public void onReceive(Context context, Intent intent) {
         
