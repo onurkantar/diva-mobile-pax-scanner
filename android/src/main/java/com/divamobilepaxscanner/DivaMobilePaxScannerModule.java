@@ -29,12 +29,12 @@ import com.pax.neptunelite.api.NeptuneLiteUser;
 public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
 
   public static final String NAME = "DivaMobilePaxScanner";
-  private ReactApplicationContext reactContext;
+  private static ReactApplicationContext reactContext;
   private DivaMobilePaxScannerReceiver paxScannerReceiver;
 
   public DivaMobilePaxScannerModule(ReactApplicationContext reactContext) {
     super(reactContext);
-    this.reactContext = reactContext;
+    DivaMobilePaxScannerModule.reactContext = reactContext;
   }
 
   @Override
@@ -43,7 +43,7 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
   }
 
   protected static void sendEvent(String eventName, @Nullable WritableMap params) {
-      this.reactContext
+      DivaMobilePaxScannerModule.reactContext
               .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
               .emit(eventName, params);
     }
@@ -52,8 +52,8 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
   public void init(final Promise promise) {
     try 
     {
-      IDAL idal = NeptuneLiteUser.getInstance().getDal(this.reactContext);
-      this.paxScannerReceiver = new DivaMobilePaxScannerReceiver(this.reactContext);
+      IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
+      this.paxScannerReceiver = new DivaMobilePaxScannerReceiver(DivaMobilePaxScannerModule.reactContext);
       idal.getSys().setScanResultMode(1);
       promise.resolve(true);
     } catch (Exception e) {
@@ -65,7 +65,7 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
   public void finalize(Promise promise) {
     try 
     {
-      IDAL idal = NeptuneLiteUser.getInstance().getDal(this.reactContext);
+      IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
       this.paxScannerReceiver = null;
       idal.getSys().setScanResultMode(0);
       promise.resolve(true);

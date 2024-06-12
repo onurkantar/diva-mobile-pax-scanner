@@ -21,10 +21,6 @@ const BARCODE_READ_SUCCESS = 'barcodeReadSuccess';
 
 let isListenerAssigned = false;
 
-export function multiply(a: number, b: number): Promise<number> {
-  return DivaMobilePaxScanner.multiply(a, b);
-}
-
 DivaMobilePaxScanner.startReader = (handler: any) => {
   if (!isListenerAssigned) {
     // Initialize the Zebra scanner
