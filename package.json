@@ -1,6 +1,6 @@
 {
   "name": "diva-mobile-pax-scanner",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "diva mobile pax scanner hw",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
