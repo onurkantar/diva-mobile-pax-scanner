@@ -2,7 +2,7 @@
           package="com.divamobilepaxscanner">
     <application>
         <receiver
-        android:name=".RNDivaMobilePaxScannerReceiver"
+        android:name=".DivaMobilePaxScannerReceiver"
         android:enabled="true"
         android:exported="true">
             <intent-filter>

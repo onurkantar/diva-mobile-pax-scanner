@@ -22,15 +22,11 @@ public class DivaMobilePaxScannerReceiver extends BroadcastReceiver {
 
     private ReactApplicationContext reactApplicationContext;
 
-    public DivaMobilePaxScannerReceiver(ReactApplicationContext reactApplicationContext) {
-        this.reactApplicationContext = reactApplicationContext;
-    }
-
     @Override
     public void onReceive(Context context, Intent intent) {
         
         try{
-            //Log.d("Barcode BroadCast", intent.getAction() + " " + intent.getStringExtra("BARCODE") + " " + intent.getStringExtra("CODE_FORMAT"));
+            Log.d("Barcode BroadCast", intent.getAction() + " " + intent.getStringExtra("BARCODE") + " " + intent.getStringExtra("CODE_FORMAT"));
             WritableMap params = Arguments.createMap();
             params.putString("data", intent.getStringExtra("BARCODE"));
             DivaMobilePaxScannerModule.sendEvent(BARCODE_READ_SUCCESS, params);
