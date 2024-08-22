@@ -22,6 +22,8 @@ public class DivaMobilePaxScannerReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        if(intent == null || context == null) {return;}
         
         try{
             Log.d("Barcode BroadCast", intent.getAction() + " " + intent.getStringExtra("BARCODE") + " " + intent.getStringExtra("CODE_FORMAT"));

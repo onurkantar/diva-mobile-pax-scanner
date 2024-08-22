@@ -43,7 +43,7 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
 
   protected static void sendEvent(String eventName, @Nullable WritableMap params) {
       DivaMobilePaxScannerModule.reactContext
-              .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+              ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
               .emit(eventName, params);
     }
 
