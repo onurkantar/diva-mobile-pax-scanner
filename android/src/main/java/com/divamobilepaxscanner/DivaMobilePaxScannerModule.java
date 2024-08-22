@@ -64,7 +64,6 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
     try 
     {
       IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
-      idal.getSys().setScanResultMode(0);
       promise.resolve(true);
     } catch (Exception e) {
       e.printStackTrace();
