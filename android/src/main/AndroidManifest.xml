@@ -4,7 +4,7 @@
         <receiver
         android:name=".DivaMobilePaxScannerReceiver"
         android:enabled="true"
-        android:exported="true">
+        android:exported="false">
             <intent-filter>
                 <action android:name="com.barcode.sendBroadcast" />
             </intent-filter>
