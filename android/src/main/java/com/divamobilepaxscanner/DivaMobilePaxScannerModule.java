@@ -49,10 +49,11 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void init(final Promise promise) {
-    try 
+    try
     {
       IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
       idal.getSys().setScanResultMode(1);
+      Log.d("Barcode init","init");
       promise.resolve(true);
     } catch (Exception e) {
       e.printStackTrace();
@@ -61,10 +62,11 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void finalize(Promise promise) {
-    try 
+    try
     {
       IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
       idal.getSys().setScanResultMode(0);
+      Log.d("Barcode finalize","finalize");
       promise.resolve(true);
     } catch (Exception e) {
       e.printStackTrace();
