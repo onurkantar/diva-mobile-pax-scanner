@@ -12,6 +12,10 @@ import java.util.Map;
 import android.os.Build;
 import android.util.Log;
 
+import android.app.ActivityManager;
+import android.content.Context;
+
+import android.content.IntentFilter;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -30,6 +34,8 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
 
   public static final String NAME = "DivaMobilePaxScanner";
   private static ReactApplicationContext reactContext;
+  private DivaMobilePaxScannerReceiver receiver; // Add receiver variable
+
 
   public DivaMobilePaxScannerModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -49,11 +55,12 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void init(final Promise promise) {
-    try
+    try 
     {
       IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
       idal.getSys().setScanResultMode(1);
       Log.d("Barcode init","init");
+      registerReceiver();
       promise.resolve(true);
     } catch (Exception e) {
       e.printStackTrace();
@@ -62,14 +69,38 @@ public class DivaMobilePaxScannerModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void finalize(Promise promise) {
-    try
+    try 
     {
       IDAL idal = NeptuneLiteUser.getInstance().getDal(DivaMobilePaxScannerModule.reactContext);
-      idal.getSys().setScanResultMode(0);
       Log.d("Barcode finalize","finalize");
+      idal.getSys().setScanResultMode(0);
+      unregisterReceiver();
+
       promise.resolve(true);
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
+    // Register the BroadcastReceiver dynamically
+    @ReactMethod
+    private void registerReceiver() {
+        if (receiver == null) {
+            receiver = new DivaMobilePaxScannerReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("com.barcode.sendBroadcast");
+            // Register the receiver with the intent filter
+            reactContext.registerReceiver(receiver, filter);
+            Log.d("DivaMobilePaxScanner", "Receiver registered");
+        }
+    }
+
+    // Unregister the BroadcastReceiver
+    @ReactMethod
+    private void unregisterReceiver() {
+        if (receiver != null) {
+            reactContext.unregisterReceiver(receiver);
+            receiver = null;
+            Log.d("DivaMobilePaxScanner", "Receiver unregistered");
+        }
+    }
 }
