@@ -23,7 +23,6 @@ let isListenerAssigned = false;
 
 DivaMobilePaxScanner.startReader = (handler: any) => {
   if (!isListenerAssigned) {
-    // Initialize the Zebra scanner
     return DivaMobilePaxScanner.init().then(() => {
       // Subscribe to the BARCODE_READ_SUCCESS event
       if (
@@ -41,7 +40,6 @@ DivaMobilePaxScanner.startReader = (handler: any) => {
 
 DivaMobilePaxScanner.stopReader = () => {
   if (isListenerAssigned) {
-    // Finalize the Zebra scanner
     return DivaMobilePaxScanner.finalize().then(() => {
       // Unsubscribe from the event
       DeviceEventEmitter.removeAllListeners(BARCODE_READ_SUCCESS);

@@ -22,20 +22,25 @@ public class DivaMobilePaxScannerReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+    if (intent == null || context == null) {
+        Log.e("BarcodeReceiver", "Intent or context is null");
+        return;
+    }
 
-        if(intent == null || context == null) {return;}
-        
-        try{
-            Log.d("Barcode BroadCast", intent.getAction() + " " + intent.getStringExtra("BARCODE") + " " + intent.getStringExtra("CODE_FORMAT"));
-            WritableMap params = Arguments.createMap();
-            params.putString("data", intent.getStringExtra("BARCODE"));
-            DivaMobilePaxScannerModule.sendEvent(BARCODE_READ_SUCCESS, params);
-        }
+    try {
+        Log.d("BarcodeReceiver", "Received action: " + intent.getAction());
+        Log.d("BarcodeReceiver", "Barcode: " + intent.getStringExtra("BARCODE"));
 
-        catch(Exception e){
-            WritableMap params = Arguments.createMap();
-            params.putString("error", e.getMessage());
-            DivaMobilePaxScannerModule.sendEvent(BARCODE_READ_FAIL, params);
-        }
+        WritableMap params = Arguments.createMap();
+        params.putString("data", intent.getStringExtra("BARCODE"));
+
+        // Send success event
+        DivaMobilePaxScannerModule.sendEvent(BARCODE_READ_SUCCESS, params);
+    } catch (Exception e) {
+        Log.e("BarcodeReceiver", "Error in onReceive: " + e.getMessage());
+        WritableMap params = Arguments.createMap();
+        params.putString("error", e.getMessage());
+        DivaMobilePaxScannerModule.sendEvent(BARCODE_READ_FAIL, params);
+    }
     }
 }

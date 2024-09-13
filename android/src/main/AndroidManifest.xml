@@ -1,13 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.divamobilepaxscanner">
     <application>
-        <receiver
-        android:name=".DivaMobilePaxScannerReceiver"
-        android:enabled="true"
-        android:exported="false">
-            <intent-filter>
-                <action android:name="com.divamobilepaxscanner.barcode.sendBroadcast" />
-            </intent-filter>
-        </receiver>
+      
     </application>
 </manifest>
