@@ -1,6 +1,6 @@
 {
   "name": "diva-mobile-pax-scanner",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "description": "diva mobile pax scanner hw",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -75,10 +75,6 @@
   },
   "resolutions": {
     "@types/react": "^18.2.44"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-native": "^0.73.0"
   },
   "workspaces": [
     "example"
